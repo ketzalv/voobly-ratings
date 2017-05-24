@@ -32,7 +32,8 @@ public class WsCaller implements IRequestConsumer {
                 new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                request.requestResult.onSuccess(new DataManager(true,
+                request.requestResult.onSuccess(new DataManager(request.identifier,
+                        true,
                         jsonToObject(response.toString(), request.typeResponse),
                         DataManager.Origin.NETWORK,
                         request.endPoint));
@@ -40,7 +41,8 @@ public class WsCaller implements IRequestConsumer {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                request.requestResult.onFailed(new DataManager(false,
+                request.requestResult.onFailed(new DataManager(request.identifier,
+                        false,
                         getMessage(error.getClass().getName()),
                         DataManager.Origin.NETWORK,
                         request.endPoint));
@@ -57,7 +59,8 @@ public class WsCaller implements IRequestConsumer {
         StringRequest stringRequest = new StringRequest(request.method, request.url_request, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                request.requestResult.onSuccess(new DataManager(true,
+                request.requestResult.onSuccess(new DataManager(request.identifier,
+                        true,
                         response,
                         DataManager.Origin.NETWORK,
                         request.endPoint));
@@ -65,7 +68,8 @@ public class WsCaller implements IRequestConsumer {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                request.requestResult.onFailed(new DataManager(false,
+                request.requestResult.onFailed(new DataManager(request.identifier,
+                        false,
                         getMessage(error.getClass().getName()),
                         DataManager.Origin.NETWORK,
                         request.endPoint));

@@ -3,42 +3,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.voobly.ratings.ui.home.HomeFragment">
-    <FrameLayout
-        android:orientation="vertical"
+    tools:context="com.voobly.ratings.ui.home.HomeFragment"
+    android:background="@color/background">
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/srlFeeds"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            android:layout_marginTop="?android:attr/actionBarSize"
-            android:id="@+id/progressContainer"
-            android:visibility="visible"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            layout="@layout/progress_view"/>
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="?android:attr/actionBarSize"
-            android:visibility="visible"
-            android:id="@+id/topLadders"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </FrameLayout>
-    <com.arlib.floatingsearchview.FloatingSearchView
-        android:id="@+id/floating_search_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:floatingSearch_searchBarMarginLeft="8dp"
-        app:floatingSearch_searchBarMarginTop="2dp"
-        app:floatingSearch_searchBarMarginRight="8dp"
-        app:floatingSearch_searchHint="Buscar"
-        app:floatingSearch_showSearchKey="false"
-        app:floatingSearch_leftActionMode="showHamburger"
-        app:floatingSearch_suggestionsListAnimDuration="250"
-        app:floatingSearch_close_search_on_keyboard_dismiss="true"/>
-    <Button
-        android:id="@+id/pulsar"
-        android:text="pulsar"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.voobly.ratings.utils.customviews.MaterialButton
+                    android:id="@+id/btnSearch"
+                    app:buttonNormalColor="@color/colorPrimary"
+                    android:textColor="@color/colorWhite"
+                    app:intercepterOnclick="true"
+                    android:text="Find user"
+                    android:textAllCaps="false"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height" />
+                <com.voobly.ratings.utils.customviews.MaterialButton
+                    android:id="@+id/btnRanking"
+                    app:buttonNormalColor="@color/colorPrimary"
+                    android:textColor="@color/colorWhite"
+                    app:intercepterOnclick="true"
+                    android:textAllCaps="false"
+                    android:text="Ranking"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height" />
+            </LinearLayout>
+            <com.voobly.ratings.utils.customviews.MaterialTextView
+                android:layout_margin="@dimen/margin_medium"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
+                app:tipo="Titulo"
+                android:text="NEWS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <FrameLayout
+                android:id="@+id/flMainContainer"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvFeeds"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </FrameLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <include android:visibility="gone" layout="@layout/progress_view"/>
+    <include android:visibility="gone" layout="@layout/error_view"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

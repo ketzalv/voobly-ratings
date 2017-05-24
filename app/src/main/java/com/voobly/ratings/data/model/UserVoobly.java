@@ -10,7 +10,7 @@ public class UserVoobly {
     public String   name;
     public String   account_created;
     public String   last_login;
-    public String  sex;
+    public String   sex;
     public String   nationid;
     public String   bday;
     public String   bmonth;
@@ -22,20 +22,20 @@ public class UserVoobly {
     public String   tid;
 
     public UserVoobly(){
-        uid = "";
-        display_name = "";
-        name = "";
+        uid             = "";
+        display_name    = "";
+        name            = "";
         account_created = "";
-        last_login = "";
-        sex = "";
-        nationid = "";
-        bday = "";
-        bmonth = "";
-        byear = "";
-        level = "";
-        nation = "";
-        imagelarge = "";
-        imagesmall = "";
-        tid = "";
+        last_login      = "";
+        sex             = "";
+        nationid        = "";
+        bday            = "";
+        bmonth          = "";
+        byear           = "";
+        level           = "";
+        nation          = "";
+        imagelarge      = "";
+        imagesmall      = "";
+        tid             = "";
     }
 }

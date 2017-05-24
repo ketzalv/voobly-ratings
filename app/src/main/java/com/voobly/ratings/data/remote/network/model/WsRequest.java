@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 public class WsRequest {
 
+    public String                  identifier;
     public int                     method;
     public HashMap<String,String>  headers;
     public String                  url_request;
@@ -22,7 +23,8 @@ public class WsRequest {
     public Type                    typeResponse;
     public EndPoint endPoint;
 
-    public WsRequest(EndPoint endPoint, int method, HashMap<String, String> headers, String url_request, Object body, IRequestResult requestResult, int timeOut, Type typeResponse){
+    public WsRequest(String identifier, EndPoint endPoint, int method, HashMap<String, String> headers, String url_request, Object body, IRequestResult requestResult, int timeOut, Type typeResponse){
+        this.identifier     = identifier;
         this.endPoint       = endPoint;
         this.method         = method;
         this.headers        = headers;
@@ -32,5 +34,6 @@ public class WsRequest {
         this.timeOut        = timeOut;
         this.typeResponse   = typeResponse;
     }
+
 
 }

@@ -30,7 +30,6 @@ public abstract class GenericRecyclerViewAdapter<T, VH extends RecyclerView.View
 
     public Boolean updateList(List<T> items) {
         if (items != null && items.size() > 0) {
-
             this.items.clear();
             this.items.addAll(items);
             notifyDataSetChanged();

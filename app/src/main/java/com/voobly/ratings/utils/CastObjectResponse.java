@@ -4,11 +4,14 @@ import android.util.Log;
 
 import com.voobly.ratings.data.model.UserVoobly;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,9 +33,22 @@ public class CastObjectResponse {
                     for(int j = 0; j < names.length; j++){
                         try {
                             Field field = instance.getClass().getDeclaredField(names[j]);
-                            field.setAccessible(true);
-                            field.set(instance, values[j]);
-                            field.setAccessible(false);
+                            if(instance.getClass().getSimpleName().equals("Lobby") && names[j].equals("ladders")){
+                                try{
+                                    String[] ladders = values[j].split("\\|");
+                                    if(ladders != null && ladders.length > 0){
+                                        field.setAccessible(true);
+                                        field.set(instance, Arrays.asList(ladders));
+                                        field.setAccessible(false);
+                                    }
+                                }catch (Exception e){
+
+                                }
+                            }else{
+                                field.setAccessible(true);
+                                field.set(instance, values[j]);
+                                field.setAccessible(false);
+                            }
                         } catch (Exception e){
                             e.printStackTrace();
                             try {

@@ -1,44 +1,109 @@
 package com.voobly.ratings.ui.home;
 
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.google.gson.Gson;
 import com.voobly.ratings.R;
-import com.voobly.ratings.data.DataManager;
-import com.voobly.ratings.data.model.UserVoobly;
-import com.voobly.ratings.data.remote.VooblyRequestMethod;
-import com.voobly.ratings.data.remote.interfaces.IRequestResult;
-import com.voobly.ratings.ui.base.activities.BaseActivity;
-import com.voobly.ratings.utils.CastObjectResponse;
+import com.voobly.ratings.data.DataManagerEvent;
+import com.voobly.ratings.data.model.Lobby;
+import com.voobly.ratings.ui.base.factoryactivities.BaseActivity;
+import com.voobly.ratings.ui.home.ChatFragment.ChatFragment;
+import com.voobly.ratings.ui.home.twitch.TwitchFragment;
+import com.voobly.ratings.ui.ladders.ListLadderFragment;
+import com.voobly.ratings.ui.lobbies.ListLobbyFragment;
+import com.voobly.ratings.ui.rank.RankFragment;
+import com.voobly.ratings.utils.CustomTypefaceSpan;
 
-public class HomeActivity extends BaseActivity implements IRequestResult, View.OnClickListener{
+import static com.voobly.ratings.ui.base.BaseEventsContract.EVENT_GO_RANKING;
+import static com.voobly.ratings.ui.base.BaseEventsContract.EVENT_LADDER_ELEMENT;
+import static com.voobly.ratings.ui.base.BaseEventsContract.EVENT_LOBBY_ELEMENT;
 
+public class HomeActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+
+    private HomeFragment homeFragment;
+    private TwitchFragment twitchFragment;
+    private ChatFragment chatFragment;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setIdsContainers(R.id.coordinatorContainer, R.id.fragmentContainer, R.id.progressContainer);
-        loadFragment(HomeFragment.newInstance());
+        setContentView(R.layout.activity_home);
+        setIdsContainers(R.id.coordinatorContainer, R.id.fragmentContainer, R.id.progressView, R.id.errorView, R.id.fragmentContainer);
+        showMainViewActivity();
+        initFragments();
+        loadFragment(homeFragment);
+        //loadFragment(HomeFragment.newInstance());
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
+        setTypeFace(navigation);
+    }
+
+    private void initFragments() {
+        homeFragment = HomeFragment.newInstance();
+        twitchFragment = TwitchFragment.newInstance();
+        chatFragment = ChatFragment.newInstance();
     }
 
     @Override
-    public void onSuccess(DataManager dataManager) {
-        Log.d(getClass().getSimpleName(), "RESPONSE > " + dataManager.getData());
-        Log.d(getClass().getSimpleName(), "RESPONSE OBJECT FORMATED: " + new Gson().toJson(CastObjectResponse.castVooblyResponseToObject(UserVoobly.class, (String) dataManager.getData())));
+    public void onEvent(DataManagerEvent data) {
+        super.onEvent(data);
+        switch (data.getEvent()){
+            case EVENT_LOBBY_ELEMENT:
+                if(data.getData() instanceof Lobby){
+                    loadFragment(ListLadderFragment.newInstance((Lobby) data.getData()), true);
+                }else{
+                    throw new RuntimeException("need lobby");
+                }
+                break;
+            case EVENT_LADDER_ELEMENT:
+                if(data.getData() instanceof String){
+                    loadFragment(RankFragment.newInstance((String) data.getData()), true);
+                }else{
+                    throw new RuntimeException("need id ladder");
+                }
+                break;
+            case EVENT_GO_RANKING:
+                BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+                loadFragment(ListLobbyFragment.newInstance(), DIRECTION.FADE, true);
+                break;
+        }
     }
 
     @Override
-    public void onFailed(DataManager dataManager) {
-        Log.d(getClass().getSimpleName(), "RESPONSE > " + dataManager.getData());
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+                loadFragment(homeFragment, DIRECTION.FADE);
+                return true;
+            case R.id.navigation_twitch:
+                loadFragment(twitchFragment, DIRECTION.FADE);
+                return true;
+            case R.id.navigation_chat:
+                loadFragment(chatFragment, DIRECTION.FADE);
+                return true;
+        }
+        return false;
+    }
+    private void setTypeFace(BottomNavigationView navigationView){
+        Menu menu = navigationView.getMenu();
+        for(int i = 0; i < menu.size(); i++){
+            MenuItem item = menu.getItem(i);
+            applyFont(item);
+        }
     }
 
-    @Override
-    public void onClick(View v) {
-        VooblyRequestMethod.getUserInformation(this, "149723");
+    private void applyFont(MenuItem item) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/comfortaa/ComfortaaRegular.ttf");
+        SpannableString mNewTitle = new SpannableString(item.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        item.setTitle(mNewTitle);
     }
 }

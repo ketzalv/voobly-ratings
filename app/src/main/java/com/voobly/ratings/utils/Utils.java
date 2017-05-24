@@ -5,12 +5,17 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.lang.reflect.Type;
+import java.util.List;
 
 /**
  * Created by jvazquez on 02/05/2017.
@@ -60,5 +65,13 @@ public class Utils {
     }
     public static void showSnackBar(View coordinatorLayout, String message, String actionName, int duration, View.OnClickListener listener){
         Snackbar.make(coordinatorLayout, message, duration).setAction(actionName, listener).show();
+    }
+
+    public static <T> List<T> jsonArrayToList(Class<T> object, String jsonArray){
+        Type listType = new TypeToken<T>() {}.getType();
+        return new Gson().<List>fromJson(jsonArray, listType);
+    }
+    public static String findLadderName(String id){
+        return "LadderName: " + id;
     }
 }

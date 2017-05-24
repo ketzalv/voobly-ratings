@@ -1,5 +1,9 @@
 package com.voobly.ratings.ui.base.interfaces;
 
+import com.voobly.ratings.data.model.Lobby;
+
+import java.util.List;
+
 /**
  * @author Jose Alberto Vazquez
  * @email imketzal@gmail.com
@@ -10,5 +14,6 @@ package com.voobly.ratings.ui.base.interfaces;
 public interface IEventOnView {
     void showProgress(String message);
     void hideProgress();
-    void showMessage(String Message);
+    void showError(String message);
+    void showMessage(String message);
 }

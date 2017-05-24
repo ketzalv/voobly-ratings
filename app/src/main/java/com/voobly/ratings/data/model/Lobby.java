@@ -1,25 +1,28 @@
 package com.voobly.ratings.data.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by jvazquez on 02/05/2017.
  */
 
 public class Lobby {
-    public String lobbyid          = "";
-    public String name             = "";
-    public String players_online   = "";
-    public String max_players      = "";
-    public String ladders          = "";
+    private String          lobbyid         = "";
+    private String          name            = "";
+    private String          players_online  = "";
+    private String          max_players     = "";
+    private List<String>    ladders         = new ArrayList<>();
 
     public Lobby(){
         lobbyid          = "";
         name             = "";
         players_online   = "";
         max_players      = "";
-        ladders          = "";
+        ladders          = new ArrayList<>();
     }
 
-    public String getLadders() {
+    public List<String> getLadders() {
         return ladders;
     }
 
@@ -39,7 +42,7 @@ public class Lobby {
         return players_online;
     }
 
-    public void setLadders(String ladders) {
+    public void setLadders(List<String> ladders) {
         this.ladders = ladders;
     }
 

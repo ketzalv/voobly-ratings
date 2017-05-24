@@ -3,6 +3,7 @@ package com.voobly.ratings;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.voobly.ratings.data.local.Preferencias;
 
 /**
@@ -18,6 +19,7 @@ public class VooblyApp extends Application {
         super.onCreate();
         m_singleton = this;
         pref = new Preferencias(this);
+        Fresco.initialize(this);
     }
     public static VooblyApp getInstance(){
         return m_singleton;

@@ -11,12 +11,15 @@ import com.voobly.ratings.data.remote.EndPoint;
  */
 
 public class DataManager {
+
+    private String identifier;
     private boolean status;
     private Object  data;
     private Origin origin;
     private EndPoint endPoint;
 
-    public DataManager(boolean status, Object data, Origin origin, EndPoint endPoint){
+    public DataManager(String identifier, boolean status, Object data, Origin origin, EndPoint endPoint){
+        this.identifier = identifier;
         this.status     = status;
         this.data       = data;
         this.origin     = origin;
@@ -25,6 +28,14 @@ public class DataManager {
 
     public enum Origin {
         LOCAL, NETWORK
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public Object getData() {

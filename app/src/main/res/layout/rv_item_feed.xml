@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/margin_small"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:id="@+id/cvContentElement"
+    app:elevation="@dimen/cardview_elevation"
+    app:cardCornerRadius="@dimen/cardview_radius">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@color/background"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/ivLadder"
+                app:srcCompat="@mipmap/ic_thread"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_small"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.voobly.ratings.utils.customviews.MaterialTextView
+                        android:layout_margin="@dimen/margin_small"
+                        android:text="Forum:"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:tipo="Titulo"
+                        android:gravity="center_vertical|start"
+                        android:maxLines="2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <com.voobly.ratings.utils.customviews.MaterialTextView
+                        android:id="@+id/tvForumTitle"
+                        android:layout_margin="@dimen/margin_small"
+                        android:text="Titulo Foro"
+                        android:gravity="center_vertical|start"
+                        android:maxLines="2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <com.voobly.ratings.utils.customviews.MaterialTextView
+                    android:id="@+id/tvForumDescription"
+                    android:layout_margin="@dimen/margin_small"
+                    android:text="Descripcion Foro"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <com.voobly.ratings.utils.customviews.MaterialTextView
+                android:id="@+id/tvThreadTitle"
+                android:layout_margin="@dimen/margin_small"
+                android:text="Titulo Tema"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.voobly.ratings.utils.customviews.MaterialTextView
+                    android:id="@+id/tvThreadAuthor"
+                    android:layout_margin="@dimen/margin_small"
+                    android:text="Autor"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+                <com.voobly.ratings.utils.customviews.MaterialTextView
+                    android:id="@+id/tvThreadDate"
+                    android:layout_margin="@dimen/margin_small"
+                    android:text="fecha"
+                    android:layout_weight="2"
+                    android:maxLines="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <com.voobly.ratings.utils.customviews.MaterialTextView
+                    android:id="@+id/tvThreadDescription"
+                    android:layout_margin="@dimen/margin_small"
+                    android:text="Descripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <com.voobly.ratings.utils.customviews.MaterialTextView
+                android:textColor="@color/colorAccent"
+                android:id="@+id/tvReadMore"
+                android:padding="@dimen/margin_small"
+                app:tipo="Titulo"
+                android:gravity="center_vertical|end"
+                android:text="leer mas..."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -10,9 +10,10 @@ package com.voobly.ratings.data.remote;
 public enum EndPoint {
 
     USER("user/"),
-    USER_LADDER_INFORMATION("ladder/"),
     USER_FINDER("finuser/"),
-    LOBBIES("lobbies/");
+    LADDER("ladder/"),
+    LOBBIES("lobbies/"),
+    FORUM_ANNOUNCEMENTS("588");
 
     private String name;
     private EndPoint(String name){

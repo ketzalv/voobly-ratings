@@ -1,5 +1,6 @@
 package com.voobly.ratings.ui.base.presenters;
 
+import com.voobly.ratings.data.DataManager;
 import com.voobly.ratings.data.remote.interfaces.IRequestResult;
 import com.voobly.ratings.ui.base.interfaces.IEventOnView;
 
@@ -12,5 +13,15 @@ public abstract class BasePresenter<iEventOnView extends IEventOnView> implement
 
     public BasePresenter(iEventOnView view){
         this.view = view;
+    }
+
+    @Override
+    public void onSuccess(DataManager dataManager) {
+        view.hideProgress();
+    }
+
+    @Override
+    public void onFailed(DataManager dataManager) {
+        view.hideProgress();
     }
 }

@@ -10,4 +10,26 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- @see rv_item_lobby -->
+    <string name="text_ladders">Ladder : %1$s</string>
+    <!-- @see rv_item_rank -->
+    <string name="text_rank">Rank:%1$s</string>
+    <string name="text_rating">Rating:%1$s</string>
+    <string name="text_wins">Wins:%1$s</string>
+    <string name="text_losses">losses:%1$s</string>
+    <string name="text_streak">Streak:%1$s</string>
+
+    <!-- Menú message -->
+    <string name="text_home">Home</string>
+    <string name="text_twitch">Twitch</string>
+    <string name="text_chat">Chat</string>
+
+    <!-- Chat -->
+    <string name="text_chat_pending">Integrate feature Chat pending</string>
+    <!-- Twitch -->
+    <string name="text_twitch_pending">Integrate feature Twitch pending</string>
+
+    <!-- Strings for ListLobbies -->
+    <string name="text_listLobies">Select the lobby:</string>
 </resources>
